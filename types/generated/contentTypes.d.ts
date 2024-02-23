@@ -362,7 +362,7 @@ export interface AdminTransferTokenPermission extends Schema.CollectionType {
   };
 }
 
-export interface ApiConfigConfig extends Schema.CollectionType {
+export interface ApiConfigConfig extends Schema.SingleType {
   collectionName: 'configs';
   info: {
     singularName: 'config';
