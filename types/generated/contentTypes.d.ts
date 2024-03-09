@@ -362,21 +362,20 @@ export interface AdminTransferTokenPermission extends Schema.CollectionType {
   };
 }
 
-export interface ApiConfigConfig extends Schema.SingleType {
+export interface ApiConfigConfig extends Schema.CollectionType {
   collectionName: 'configs';
   info: {
     singularName: 'config';
     pluralName: 'configs';
     displayName: 'WECConfiguration';
-    description: '';
   };
   options: {
     draftAndPublish: true;
   };
   attributes: {
-    cofig_name: Attribute.String;
+    config_name: Attribute.String;
     config_value: Attribute.String;
-    config_value_text: Attribute.Text;
+    config_value_long: Attribute.Text;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
