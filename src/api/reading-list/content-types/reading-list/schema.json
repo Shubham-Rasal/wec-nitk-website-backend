@@ -1,0 +1,43 @@
+{
+  "kind": "collectionType",
+  "collectionName": "reading_lists",
+  "info": {
+    "singularName": "reading-list",
+    "pluralName": "reading-lists",
+    "displayName": "reading_list"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "title": {
+      "type": "string"
+    },
+    "body": {
+      "type": "text"
+    },
+    "topic": {
+      "type": "string"
+    },
+    "link": {
+      "type": "string"
+    },
+    "cover_image": {
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ],
+      "type": "media",
+      "multiple": true
+    },
+    "tags": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::tag.tag",
+      "mappedBy": "reading_list"
+    }
+  }
+}

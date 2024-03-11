@@ -1,0 +1,52 @@
+{
+  "kind": "collectionType",
+  "collectionName": "events",
+  "info": {
+    "singularName": "event",
+    "pluralName": "events",
+    "displayName": "events"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "sigs": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::sig.sig",
+      "inversedBy": "events"
+    },
+    "title": {
+      "type": "string"
+    },
+    "date_time": {
+      "type": "datetime"
+    },
+    "event_type": {
+      "type": "string"
+    },
+    "location": {
+      "type": "string"
+    },
+    "link": {
+      "type": "string"
+    },
+    "cems_link": {
+      "type": "string"
+    },
+    "body": {
+      "type": "text"
+    },
+    "cover_images": {
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ],
+      "type": "media",
+      "multiple": true
+    }
+  }
+}
