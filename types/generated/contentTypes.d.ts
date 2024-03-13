@@ -820,6 +820,39 @@ export interface ApiAchievementAchievement extends Schema.CollectionType {
   };
 }
 
+export interface ApiBlogBlog extends Schema.CollectionType {
+  collectionName: 'blogs';
+  info: {
+    singularName: 'blog';
+    pluralName: 'blogs';
+    displayName: 'blog';
+    description: '';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    title: Attribute.String;
+    subheading: Attribute.String;
+    body: Attribute.Text;
+    cover_image: Attribute.Media;
+    members: Attribute.Relation<
+      'api::blog.blog',
+      'oneToMany',
+      'api::member.member'
+    >;
+    sigs: Attribute.Relation<'api::blog.blog', 'oneToMany', 'api::sig.sig'>;
+    tags: Attribute.Relation<'api::blog.blog', 'manyToMany', 'api::tag.tag'>;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<'api::blog.blog', 'oneToOne', 'admin::user'> &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<'api::blog.blog', 'oneToOne', 'admin::user'> &
+      Attribute.Private;
+  };
+}
+
 export interface ApiConfigConfig extends Schema.SingleType {
   collectionName: 'configs';
   info: {
@@ -832,7 +865,7 @@ export interface ApiConfigConfig extends Schema.SingleType {
     draftAndPublish: true;
   };
   attributes: {
-    cofig_name: Attribute.String;
+    config_name: Attribute.String;
     config_value: Attribute.String;
     config_value_text: Attribute.Text;
     createdAt: Attribute.DateTime;
@@ -859,12 +892,12 @@ export interface ApiEventEvent extends Schema.CollectionType {
     singularName: 'event';
     pluralName: 'events';
     displayName: 'events';
+    description: '';
   };
   options: {
     draftAndPublish: true;
   };
   attributes: {
-    sigs: Attribute.Relation<'api::event.event', 'manyToMany', 'api::sig.sig'>;
     title: Attribute.String;
     date_time: Attribute.DateTime;
     event_type: Attribute.String;
@@ -873,6 +906,8 @@ export interface ApiEventEvent extends Schema.CollectionType {
     cems_link: Attribute.String;
     body: Attribute.Text;
     cover_images: Attribute.Media;
+    resources: Attribute.String;
+    sigs: Attribute.Relation<'api::event.event', 'oneToMany', 'api::sig.sig'>;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
@@ -914,12 +949,57 @@ export interface ApiFaqFaq extends Schema.CollectionType {
   };
 }
 
+export interface ApiMemberMember extends Schema.CollectionType {
+  collectionName: 'members';
+  info: {
+    singularName: 'member';
+    pluralName: 'members';
+    displayName: 'member';
+    description: '';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    name: Attribute.String;
+    role: Attribute.String;
+    image: Attribute.Media;
+    github_id: Attribute.String;
+    linkedin_id: Attribute.String;
+    mail_id: Attribute.String;
+    twitter_id: Attribute.String;
+    alumni: Attribute.Boolean;
+    blog: Attribute.Relation<
+      'api::member.member',
+      'manyToOne',
+      'api::blog.blog'
+    >;
+    sigs: Attribute.Relation<'api::member.member', 'oneToMany', 'api::sig.sig'>;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::member.member',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::member.member',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
 export interface ApiReadingListReadingList extends Schema.CollectionType {
   collectionName: 'reading_lists';
   info: {
     singularName: 'reading-list';
     pluralName: 'reading-lists';
     displayName: 'reading_list';
+    description: '';
   };
   options: {
     draftAndPublish: true;
@@ -932,7 +1012,7 @@ export interface ApiReadingListReadingList extends Schema.CollectionType {
     cover_image: Attribute.Media;
     tags: Attribute.Relation<
       'api::reading-list.reading-list',
-      'oneToMany',
+      'manyToMany',
       'api::tag.tag'
     >;
     createdAt: Attribute.DateTime;
@@ -959,6 +1039,7 @@ export interface ApiSigSig extends Schema.CollectionType {
     singularName: 'sig';
     pluralName: 'sigs';
     displayName: 'sig';
+    description: '';
   };
   options: {
     draftAndPublish: true;
@@ -967,15 +1048,17 @@ export interface ApiSigSig extends Schema.CollectionType {
     name: Attribute.String;
     description: Attribute.Text;
     logo: Attribute.Media;
+    event: Attribute.Relation<'api::sig.sig', 'manyToOne', 'api::event.event'>;
+    blog: Attribute.Relation<'api::sig.sig', 'manyToOne', 'api::blog.blog'>;
+    member: Attribute.Relation<
+      'api::sig.sig',
+      'manyToOne',
+      'api::member.member'
+    >;
     achievements: Attribute.Relation<
       'api::sig.sig',
       'manyToMany',
       'api::achievement.achievement'
-    >;
-    events: Attribute.Relation<
-      'api::sig.sig',
-      'manyToMany',
-      'api::event.event'
     >;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
@@ -1000,9 +1083,10 @@ export interface ApiTagTag extends Schema.CollectionType {
   };
   attributes: {
     name: Attribute.String;
-    reading_list: Attribute.Relation<
+    blogs: Attribute.Relation<'api::tag.tag', 'manyToMany', 'api::blog.blog'>;
+    reading_lists: Attribute.Relation<
       'api::tag.tag',
-      'manyToOne',
+      'manyToMany',
       'api::reading-list.reading-list'
     >;
     createdAt: Attribute.DateTime;
@@ -1034,9 +1118,11 @@ declare module '@strapi/types' {
       'plugin::users-permissions.user': PluginUsersPermissionsUser;
       'plugin::i18n.locale': PluginI18NLocale;
       'api::achievement.achievement': ApiAchievementAchievement;
+      'api::blog.blog': ApiBlogBlog;
       'api::config.config': ApiConfigConfig;
       'api::event.event': ApiEventEvent;
       'api::faq.faq': ApiFaqFaq;
+      'api::member.member': ApiMemberMember;
       'api::reading-list.reading-list': ApiReadingListReadingList;
       'api::sig.sig': ApiSigSig;
       'api::tag.tag': ApiTagTag;

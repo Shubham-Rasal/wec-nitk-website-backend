@@ -4,7 +4,8 @@
   "info": {
     "singularName": "sig",
     "pluralName": "sigs",
-    "displayName": "sig"
+    "displayName": "sig",
+    "description": ""
   },
   "options": {
     "draftAndPublish": true
@@ -18,26 +19,39 @@
       "type": "text"
     },
     "logo": {
+      "type": "media",
+      "multiple": false,
+      "required": false,
       "allowedTypes": [
         "images",
         "files",
         "videos",
         "audios"
-      ],
-      "type": "media",
-      "multiple": false
+      ]
+    },
+    "event": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::event.event",
+      "inversedBy": "sigs"
+    },
+    "blog": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::blog.blog",
+      "inversedBy": "sigs"
+    },
+    "member": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::member.member",
+      "inversedBy": "sigs"
     },
     "achievements": {
       "type": "relation",
       "relation": "manyToMany",
       "target": "api::achievement.achievement",
-      "mappedBy": "sigs"
-    },
-    "events": {
-      "type": "relation",
-      "relation": "manyToMany",
-      "target": "api::event.event",
-      "mappedBy": "sigs"
+      "inversedBy": "sigs"
     }
   }
 }

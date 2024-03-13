@@ -1,10 +1,10 @@
 {
   "kind": "collectionType",
-  "collectionName": "reading_lists",
+  "collectionName": "blogs",
   "info": {
-    "singularName": "reading-list",
-    "pluralName": "reading-lists",
-    "displayName": "reading_list",
+    "singularName": "blog",
+    "pluralName": "blogs",
+    "displayName": "blog",
     "description": ""
   },
   "options": {
@@ -15,18 +15,15 @@
     "title": {
       "type": "string"
     },
+    "subheading": {
+      "type": "string"
+    },
     "body": {
       "type": "text"
     },
-    "topic": {
-      "type": "string"
-    },
-    "link": {
-      "type": "string"
-    },
     "cover_image": {
       "type": "media",
-      "multiple": true,
+      "multiple": false,
       "required": false,
       "allowedTypes": [
         "images",
@@ -35,11 +32,23 @@
         "audios"
       ]
     },
+    "members": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::member.member",
+      "mappedBy": "blog"
+    },
+    "sigs": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::sig.sig",
+      "mappedBy": "blog"
+    },
     "tags": {
       "type": "relation",
       "relation": "manyToMany",
       "target": "api::tag.tag",
-      "mappedBy": "reading_lists"
+      "mappedBy": "blogs"
     }
   }
 }

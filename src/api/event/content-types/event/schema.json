@@ -4,19 +4,14 @@
   "info": {
     "singularName": "event",
     "pluralName": "events",
-    "displayName": "events"
+    "displayName": "events",
+    "description": ""
   },
   "options": {
     "draftAndPublish": true
   },
   "pluginOptions": {},
   "attributes": {
-    "sigs": {
-      "type": "relation",
-      "relation": "manyToMany",
-      "target": "api::sig.sig",
-      "inversedBy": "events"
-    },
     "title": {
       "type": "string"
     },
@@ -39,14 +34,24 @@
       "type": "text"
     },
     "cover_images": {
+      "type": "media",
+      "multiple": true,
+      "required": false,
       "allowedTypes": [
         "images",
         "files",
         "videos",
         "audios"
-      ],
-      "type": "media",
-      "multiple": true
+      ]
+    },
+    "resources": {
+      "type": "string"
+    },
+    "sigs": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::sig.sig",
+      "mappedBy": "event"
     }
   }
 }

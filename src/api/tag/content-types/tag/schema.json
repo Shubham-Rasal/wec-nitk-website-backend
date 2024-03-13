@@ -15,9 +15,15 @@
     "name": {
       "type": "string"
     },
-    "reading_list": {
+    "blogs": {
       "type": "relation",
-      "relation": "manyToOne",
+      "relation": "manyToMany",
+      "target": "api::blog.blog",
+      "inversedBy": "tags"
+    },
+    "reading_lists": {
+      "type": "relation",
+      "relation": "manyToMany",
       "target": "api::reading-list.reading-list",
       "inversedBy": "tags"
     }

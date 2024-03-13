@@ -12,7 +12,7 @@
   },
   "pluginOptions": {},
   "attributes": {
-    "cofig_name": {
+    "config_name": {
       "type": "string"
     },
     "config_value": {
