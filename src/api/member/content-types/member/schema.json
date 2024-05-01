@@ -52,6 +52,12 @@
       "relation": "manyToMany",
       "target": "api::blog.blog",
       "mappedBy": "written_by"
+    },
+    "posts": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::post.post",
+      "inversedBy": "members"
     }
   }
 }

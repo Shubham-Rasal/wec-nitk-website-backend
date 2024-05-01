@@ -20,6 +20,12 @@
         "main_core",
         "sig_core"
       ]
+    },
+    "members": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::member.member",
+      "mappedBy": "posts"
     }
   }
 }

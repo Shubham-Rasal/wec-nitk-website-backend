@@ -978,6 +978,11 @@ export interface ApiMemberMember extends Schema.CollectionType {
       'manyToMany',
       'api::blog.blog'
     >;
+    posts: Attribute.Relation<
+      'api::member.member',
+      'manyToMany',
+      'api::post.post'
+    >;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
@@ -1009,6 +1014,11 @@ export interface ApiPostPost extends Schema.CollectionType {
   attributes: {
     title: Attribute.String;
     core_type: Attribute.Enumeration<['main_core', 'sig_core']>;
+    members: Attribute.Relation<
+      'api::post.post',
+      'manyToMany',
+      'api::member.member'
+    >;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
