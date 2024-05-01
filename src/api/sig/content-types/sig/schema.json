@@ -29,21 +29,21 @@
         "audios"
       ]
     },
-    "event": {
+    "events": {
       "type": "relation",
-      "relation": "manyToOne",
+      "relation": "manyToMany",
       "target": "api::event.event",
       "inversedBy": "sigs"
     },
-    "blog": {
+    "blogs": {
       "type": "relation",
-      "relation": "manyToOne",
+      "relation": "manyToMany",
       "target": "api::blog.blog",
       "inversedBy": "sigs"
     },
-    "member": {
+    "members": {
       "type": "relation",
-      "relation": "manyToOne",
+      "relation": "manyToMany",
       "target": "api::member.member",
       "inversedBy": "sigs"
     },

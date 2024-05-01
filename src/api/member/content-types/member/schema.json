@@ -15,9 +15,6 @@
     "name": {
       "type": "string"
     },
-    "role": {
-      "type": "string"
-    },
     "image": {
       "type": "media",
       "multiple": false,
@@ -44,17 +41,17 @@
     "alumni": {
       "type": "boolean"
     },
-    "blog": {
+    "blogs": {
       "type": "relation",
-      "relation": "manyToOne",
+      "relation": "manyToMany",
       "target": "api::blog.blog",
       "inversedBy": "members"
     },
     "sigs": {
       "type": "relation",
-      "relation": "oneToMany",
+      "relation": "manyToMany",
       "target": "api::sig.sig",
-      "mappedBy": "member"
+      "mappedBy": "members"
     }
   }
 }

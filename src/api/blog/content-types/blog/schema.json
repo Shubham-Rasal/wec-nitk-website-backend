@@ -34,20 +34,20 @@
     },
     "members": {
       "type": "relation",
-      "relation": "oneToMany",
+      "relation": "manyToMany",
       "target": "api::member.member",
-      "mappedBy": "blog"
-    },
-    "sigs": {
-      "type": "relation",
-      "relation": "oneToMany",
-      "target": "api::sig.sig",
-      "mappedBy": "blog"
+      "mappedBy": "blogs"
     },
     "tags": {
       "type": "relation",
       "relation": "manyToMany",
       "target": "api::tag.tag",
+      "mappedBy": "blogs"
+    },
+    "sigs": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::sig.sig",
       "mappedBy": "blogs"
     }
   }

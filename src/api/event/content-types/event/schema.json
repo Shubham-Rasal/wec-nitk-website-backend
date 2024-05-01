@@ -49,9 +49,9 @@
     },
     "sigs": {
       "type": "relation",
-      "relation": "oneToMany",
+      "relation": "manyToMany",
       "target": "api::sig.sig",
-      "mappedBy": "event"
+      "mappedBy": "events"
     }
   }
 }

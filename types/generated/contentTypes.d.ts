@@ -838,11 +838,11 @@ export interface ApiBlogBlog extends Schema.CollectionType {
     cover_image: Attribute.Media;
     members: Attribute.Relation<
       'api::blog.blog',
-      'oneToMany',
+      'manyToMany',
       'api::member.member'
     >;
-    sigs: Attribute.Relation<'api::blog.blog', 'oneToMany', 'api::sig.sig'>;
     tags: Attribute.Relation<'api::blog.blog', 'manyToMany', 'api::tag.tag'>;
+    sigs: Attribute.Relation<'api::blog.blog', 'manyToMany', 'api::sig.sig'>;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
@@ -907,7 +907,7 @@ export interface ApiEventEvent extends Schema.CollectionType {
     body: Attribute.Text;
     cover_images: Attribute.Media;
     resources: Attribute.String;
-    sigs: Attribute.Relation<'api::event.event', 'oneToMany', 'api::sig.sig'>;
+    sigs: Attribute.Relation<'api::event.event', 'manyToMany', 'api::sig.sig'>;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
@@ -962,19 +962,22 @@ export interface ApiMemberMember extends Schema.CollectionType {
   };
   attributes: {
     name: Attribute.String;
-    role: Attribute.String;
     image: Attribute.Media;
     github_id: Attribute.String;
     linkedin_id: Attribute.String;
     mail_id: Attribute.String;
     twitter_id: Attribute.String;
     alumni: Attribute.Boolean;
-    blog: Attribute.Relation<
+    blogs: Attribute.Relation<
       'api::member.member',
-      'manyToOne',
+      'manyToMany',
       'api::blog.blog'
     >;
-    sigs: Attribute.Relation<'api::member.member', 'oneToMany', 'api::sig.sig'>;
+    sigs: Attribute.Relation<
+      'api::member.member',
+      'manyToMany',
+      'api::sig.sig'
+    >;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
@@ -989,6 +992,29 @@ export interface ApiMemberMember extends Schema.CollectionType {
       'oneToOne',
       'admin::user'
     > &
+      Attribute.Private;
+  };
+}
+
+export interface ApiPostPost extends Schema.CollectionType {
+  collectionName: 'posts';
+  info: {
+    singularName: 'post';
+    pluralName: 'posts';
+    displayName: 'post';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    title: Attribute.String;
+    core_type: Attribute.Enumeration<['main_core', 'sig_core']>;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<'api::post.post', 'oneToOne', 'admin::user'> &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<'api::post.post', 'oneToOne', 'admin::user'> &
       Attribute.Private;
   };
 }
@@ -1048,11 +1074,15 @@ export interface ApiSigSig extends Schema.CollectionType {
     name: Attribute.String;
     description: Attribute.Text;
     logo: Attribute.Media;
-    event: Attribute.Relation<'api::sig.sig', 'manyToOne', 'api::event.event'>;
-    blog: Attribute.Relation<'api::sig.sig', 'manyToOne', 'api::blog.blog'>;
-    member: Attribute.Relation<
+    events: Attribute.Relation<
       'api::sig.sig',
-      'manyToOne',
+      'manyToMany',
+      'api::event.event'
+    >;
+    blogs: Attribute.Relation<'api::sig.sig', 'manyToMany', 'api::blog.blog'>;
+    members: Attribute.Relation<
+      'api::sig.sig',
+      'manyToMany',
       'api::member.member'
     >;
     achievements: Attribute.Relation<
@@ -1123,6 +1153,7 @@ declare module '@strapi/types' {
       'api::event.event': ApiEventEvent;
       'api::faq.faq': ApiFaqFaq;
       'api::member.member': ApiMemberMember;
+      'api::post.post': ApiPostPost;
       'api::reading-list.reading-list': ApiReadingListReadingList;
       'api::sig.sig': ApiSigSig;
       'api::tag.tag': ApiTagTag;
