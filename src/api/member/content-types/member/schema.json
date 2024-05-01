@@ -41,17 +41,17 @@
     "alumni": {
       "type": "boolean"
     },
-    "blogs": {
-      "type": "relation",
-      "relation": "manyToMany",
-      "target": "api::blog.blog",
-      "inversedBy": "members"
-    },
     "sigs": {
       "type": "relation",
       "relation": "manyToMany",
       "target": "api::sig.sig",
       "mappedBy": "members"
+    },
+    "blogs": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::blog.blog",
+      "mappedBy": "written_by"
     }
   }
 }

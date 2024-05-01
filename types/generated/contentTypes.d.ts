@@ -836,7 +836,7 @@ export interface ApiBlogBlog extends Schema.CollectionType {
     subheading: Attribute.String;
     body: Attribute.Text;
     cover_image: Attribute.Media;
-    members: Attribute.Relation<
+    written_by: Attribute.Relation<
       'api::blog.blog',
       'manyToMany',
       'api::member.member'
@@ -853,7 +853,7 @@ export interface ApiBlogBlog extends Schema.CollectionType {
   };
 }
 
-export interface ApiConfigConfig extends Schema.SingleType {
+export interface ApiConfigConfig extends Schema.CollectionType {
   collectionName: 'configs';
   info: {
     singularName: 'config';
@@ -900,14 +900,14 @@ export interface ApiEventEvent extends Schema.CollectionType {
   attributes: {
     title: Attribute.String;
     date_time: Attribute.DateTime;
-    event_type: Attribute.String;
     location: Attribute.String;
     link: Attribute.String;
     cems_link: Attribute.String;
     body: Attribute.Text;
     cover_images: Attribute.Media;
-    resources: Attribute.String;
     sigs: Attribute.Relation<'api::event.event', 'manyToMany', 'api::sig.sig'>;
+    event_type: Attribute.Enumeration<['Online', 'In-Person', 'Hybrid']>;
+    resources: Attribute.JSON;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
@@ -968,15 +968,15 @@ export interface ApiMemberMember extends Schema.CollectionType {
     mail_id: Attribute.String;
     twitter_id: Attribute.String;
     alumni: Attribute.Boolean;
-    blogs: Attribute.Relation<
-      'api::member.member',
-      'manyToMany',
-      'api::blog.blog'
-    >;
     sigs: Attribute.Relation<
       'api::member.member',
       'manyToMany',
       'api::sig.sig'
+    >;
+    blogs: Attribute.Relation<
+      'api::member.member',
+      'manyToMany',
+      'api::blog.blog'
     >;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
@@ -1041,6 +1041,8 @@ export interface ApiReadingListReadingList extends Schema.CollectionType {
       'manyToMany',
       'api::tag.tag'
     >;
+    written_on: Attribute.Date;
+    written_by: Attribute.String;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;

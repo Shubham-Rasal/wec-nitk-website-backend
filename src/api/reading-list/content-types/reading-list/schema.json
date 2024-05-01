@@ -40,6 +40,12 @@
       "relation": "manyToMany",
       "target": "api::tag.tag",
       "mappedBy": "reading_lists"
+    },
+    "written_on": {
+      "type": "date"
+    },
+    "written_by": {
+      "type": "string"
     }
   }
 }

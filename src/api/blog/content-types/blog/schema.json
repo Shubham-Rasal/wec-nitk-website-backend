@@ -32,11 +32,11 @@
         "audios"
       ]
     },
-    "members": {
+    "written_by": {
       "type": "relation",
       "relation": "manyToMany",
       "target": "api::member.member",
-      "mappedBy": "blogs"
+      "inversedBy": "blogs"
     },
     "tags": {
       "type": "relation",

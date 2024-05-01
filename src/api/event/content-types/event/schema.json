@@ -18,9 +18,6 @@
     "date_time": {
       "type": "datetime"
     },
-    "event_type": {
-      "type": "string"
-    },
     "location": {
       "type": "string"
     },
@@ -44,14 +41,22 @@
         "audios"
       ]
     },
-    "resources": {
-      "type": "string"
-    },
     "sigs": {
       "type": "relation",
       "relation": "manyToMany",
       "target": "api::sig.sig",
       "mappedBy": "events"
+    },
+    "event_type": {
+      "type": "enumeration",
+      "enum": [
+        "Online",
+        "In-Person",
+        "Hybrid"
+      ]
+    },
+    "resources": {
+      "type": "json"
     }
   }
 }
