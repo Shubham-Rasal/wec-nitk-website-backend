@@ -1,5 +1,5 @@
 {
-  "kind": "singleType",
+  "kind": "collectionType",
   "collectionName": "configs",
   "info": {
     "singularName": "config",
@@ -12,7 +12,7 @@
   },
   "pluginOptions": {},
   "attributes": {
-    "cofig_name": {
+    "config_name": {
       "type": "string"
     },
     "config_value": {

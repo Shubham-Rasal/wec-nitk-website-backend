@@ -362,39 +362,6 @@ export interface AdminTransferTokenPermission extends Schema.CollectionType {
   };
 }
 
-export interface ApiConfigConfig extends Schema.SingleType {
-  collectionName: 'configs';
-  info: {
-    singularName: 'config';
-    pluralName: 'configs';
-    displayName: 'WECConfiguration';
-    description: '';
-  };
-  options: {
-    draftAndPublish: true;
-  };
-  attributes: {
-    cofig_name: Attribute.String;
-    config_value: Attribute.String;
-    config_value_text: Attribute.Text;
-    createdAt: Attribute.DateTime;
-    updatedAt: Attribute.DateTime;
-    publishedAt: Attribute.DateTime;
-    createdBy: Attribute.Relation<
-      'api::config.config',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-    updatedBy: Attribute.Relation<
-      'api::config.config',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-  };
-}
-
 export interface PluginUploadFile extends Schema.CollectionType {
   collectionName: 'files';
   info: {
@@ -814,6 +781,366 @@ export interface PluginI18NLocale extends Schema.CollectionType {
   };
 }
 
+export interface ApiAchievementAchievement extends Schema.CollectionType {
+  collectionName: 'achievements';
+  info: {
+    singularName: 'achievement';
+    pluralName: 'achievements';
+    displayName: 'achievements';
+    description: '';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    name: Attribute.String;
+    user_name: Attribute.String;
+    image: Attribute.Media;
+    body: Attribute.Text;
+    sigs: Attribute.Relation<
+      'api::achievement.achievement',
+      'manyToMany',
+      'api::sig.sig'
+    >;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::achievement.achievement',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::achievement.achievement',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
+export interface ApiBlogBlog extends Schema.CollectionType {
+  collectionName: 'blogs';
+  info: {
+    singularName: 'blog';
+    pluralName: 'blogs';
+    displayName: 'blog';
+    description: '';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    title: Attribute.String;
+    subheading: Attribute.String;
+    body: Attribute.Text;
+    cover_image: Attribute.Media;
+    written_by: Attribute.Relation<
+      'api::blog.blog',
+      'manyToMany',
+      'api::member.member'
+    >;
+    tags: Attribute.Relation<'api::blog.blog', 'manyToMany', 'api::tag.tag'>;
+    sigs: Attribute.Relation<'api::blog.blog', 'manyToMany', 'api::sig.sig'>;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<'api::blog.blog', 'oneToOne', 'admin::user'> &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<'api::blog.blog', 'oneToOne', 'admin::user'> &
+      Attribute.Private;
+  };
+}
+
+export interface ApiConfigConfig extends Schema.CollectionType {
+  collectionName: 'configs';
+  info: {
+    singularName: 'config';
+    pluralName: 'configs';
+    displayName: 'WECConfiguration';
+    description: '';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    config_name: Attribute.String;
+    config_value: Attribute.String;
+    config_value_text: Attribute.Text;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::config.config',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::config.config',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
+export interface ApiEventEvent extends Schema.CollectionType {
+  collectionName: 'events';
+  info: {
+    singularName: 'event';
+    pluralName: 'events';
+    displayName: 'events';
+    description: '';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    title: Attribute.String;
+    date_time: Attribute.DateTime;
+    location: Attribute.String;
+    link: Attribute.String;
+    cems_link: Attribute.String;
+    body: Attribute.Text;
+    cover_images: Attribute.Media;
+    sigs: Attribute.Relation<'api::event.event', 'manyToMany', 'api::sig.sig'>;
+    event_type: Attribute.Enumeration<['Online', 'In-Person', 'Hybrid']>;
+    resources: Attribute.JSON;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::event.event',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::event.event',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
+export interface ApiFaqFaq extends Schema.CollectionType {
+  collectionName: 'faqs';
+  info: {
+    singularName: 'faq';
+    pluralName: 'faqs';
+    displayName: 'faq';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    question: Attribute.Text;
+    answer: Attribute.Text;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<'api::faq.faq', 'oneToOne', 'admin::user'> &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<'api::faq.faq', 'oneToOne', 'admin::user'> &
+      Attribute.Private;
+  };
+}
+
+export interface ApiMemberMember extends Schema.CollectionType {
+  collectionName: 'members';
+  info: {
+    singularName: 'member';
+    pluralName: 'members';
+    displayName: 'member';
+    description: '';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    name: Attribute.String;
+    image: Attribute.Media;
+    github_id: Attribute.String;
+    linkedin_id: Attribute.String;
+    mail_id: Attribute.String;
+    twitter_id: Attribute.String;
+    alumni: Attribute.Boolean;
+    sigs: Attribute.Relation<
+      'api::member.member',
+      'manyToMany',
+      'api::sig.sig'
+    >;
+    blogs: Attribute.Relation<
+      'api::member.member',
+      'manyToMany',
+      'api::blog.blog'
+    >;
+    posts: Attribute.Relation<
+      'api::member.member',
+      'manyToMany',
+      'api::post.post'
+    >;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::member.member',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::member.member',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
+export interface ApiPostPost extends Schema.CollectionType {
+  collectionName: 'posts';
+  info: {
+    singularName: 'post';
+    pluralName: 'posts';
+    displayName: 'post';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    title: Attribute.String;
+    core_type: Attribute.Enumeration<['main_core', 'sig_core']>;
+    members: Attribute.Relation<
+      'api::post.post',
+      'manyToMany',
+      'api::member.member'
+    >;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<'api::post.post', 'oneToOne', 'admin::user'> &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<'api::post.post', 'oneToOne', 'admin::user'> &
+      Attribute.Private;
+  };
+}
+
+export interface ApiReadingListReadingList extends Schema.CollectionType {
+  collectionName: 'reading_lists';
+  info: {
+    singularName: 'reading-list';
+    pluralName: 'reading-lists';
+    displayName: 'reading_list';
+    description: '';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    title: Attribute.String;
+    body: Attribute.Text;
+    topic: Attribute.String;
+    link: Attribute.String;
+    cover_image: Attribute.Media;
+    tags: Attribute.Relation<
+      'api::reading-list.reading-list',
+      'manyToMany',
+      'api::tag.tag'
+    >;
+    written_on: Attribute.Date;
+    written_by: Attribute.String;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::reading-list.reading-list',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::reading-list.reading-list',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
+export interface ApiSigSig extends Schema.CollectionType {
+  collectionName: 'sigs';
+  info: {
+    singularName: 'sig';
+    pluralName: 'sigs';
+    displayName: 'sig';
+    description: '';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    name: Attribute.String;
+    description: Attribute.Text;
+    logo: Attribute.Media;
+    events: Attribute.Relation<
+      'api::sig.sig',
+      'manyToMany',
+      'api::event.event'
+    >;
+    blogs: Attribute.Relation<'api::sig.sig', 'manyToMany', 'api::blog.blog'>;
+    members: Attribute.Relation<
+      'api::sig.sig',
+      'manyToMany',
+      'api::member.member'
+    >;
+    achievements: Attribute.Relation<
+      'api::sig.sig',
+      'manyToMany',
+      'api::achievement.achievement'
+    >;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<'api::sig.sig', 'oneToOne', 'admin::user'> &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<'api::sig.sig', 'oneToOne', 'admin::user'> &
+      Attribute.Private;
+  };
+}
+
+export interface ApiTagTag extends Schema.CollectionType {
+  collectionName: 'tags';
+  info: {
+    singularName: 'tag';
+    pluralName: 'tags';
+    displayName: 'tags';
+    description: '';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    name: Attribute.String;
+    blogs: Attribute.Relation<'api::tag.tag', 'manyToMany', 'api::blog.blog'>;
+    reading_lists: Attribute.Relation<
+      'api::tag.tag',
+      'manyToMany',
+      'api::reading-list.reading-list'
+    >;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<'api::tag.tag', 'oneToOne', 'admin::user'> &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<'api::tag.tag', 'oneToOne', 'admin::user'> &
+      Attribute.Private;
+  };
+}
+
 declare module '@strapi/types' {
   export module Shared {
     export interface ContentTypes {
@@ -824,7 +1151,6 @@ declare module '@strapi/types' {
       'admin::api-token-permission': AdminApiTokenPermission;
       'admin::transfer-token': AdminTransferToken;
       'admin::transfer-token-permission': AdminTransferTokenPermission;
-      'api::config.config': ApiConfigConfig;
       'plugin::upload.file': PluginUploadFile;
       'plugin::upload.folder': PluginUploadFolder;
       'plugin::content-releases.release': PluginContentReleasesRelease;
@@ -833,6 +1159,16 @@ declare module '@strapi/types' {
       'plugin::users-permissions.role': PluginUsersPermissionsRole;
       'plugin::users-permissions.user': PluginUsersPermissionsUser;
       'plugin::i18n.locale': PluginI18NLocale;
+      'api::achievement.achievement': ApiAchievementAchievement;
+      'api::blog.blog': ApiBlogBlog;
+      'api::config.config': ApiConfigConfig;
+      'api::event.event': ApiEventEvent;
+      'api::faq.faq': ApiFaqFaq;
+      'api::member.member': ApiMemberMember;
+      'api::post.post': ApiPostPost;
+      'api::reading-list.reading-list': ApiReadingListReadingList;
+      'api::sig.sig': ApiSigSig;
+      'api::tag.tag': ApiTagTag;
     }
   }
 }
