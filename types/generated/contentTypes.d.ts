@@ -833,6 +833,7 @@ export interface ApiBlogBlog extends Schema.CollectionType {
   };
   attributes: {
     title: Attribute.String;
+    date_time: Attribute.DateTime;
     subheading: Attribute.String;
     body: Attribute.Text;
     cover_image: Attribute.Media;
@@ -945,6 +946,51 @@ export interface ApiFaqFaq extends Schema.CollectionType {
     createdBy: Attribute.Relation<'api::faq.faq', 'oneToOne', 'admin::user'> &
       Attribute.Private;
     updatedBy: Attribute.Relation<'api::faq.faq', 'oneToOne', 'admin::user'> &
+      Attribute.Private;
+  };
+}
+
+export interface ApiHackathonHackathon extends Schema.CollectionType {
+  collectionName: 'hackathons';
+  info: {
+    singularName: 'hackathon';
+    pluralName: 'hackathons';
+    displayName: 'Hackathon';
+    description: '';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    title: Attribute.String & Attribute.Required;
+    description: Attribute.Text;
+    mode: Attribute.Enumeration<['Online', 'In-Person', 'Hybrid']>;
+    prizes: Attribute.String;
+    image: Attribute.Media;
+    registration_deadline: Attribute.DateTime;
+    start_time: Attribute.DateTime;
+    end_time: Attribute.DateTime;
+    link: Attribute.String;
+    tags: Attribute.Relation<
+      'api::hackathon.hackathon',
+      'manyToMany',
+      'api::tag.tag'
+    >;
+    status: Attribute.Enumeration<['Ongoing', 'Past', 'Upcoming']>;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::hackathon.hackathon',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::hackathon.hackathon',
+      'oneToOne',
+      'admin::user'
+    > &
       Attribute.Private;
   };
 }
@@ -1131,6 +1177,11 @@ export interface ApiTagTag extends Schema.CollectionType {
       'manyToMany',
       'api::reading-list.reading-list'
     >;
+    hackathons: Attribute.Relation<
+      'api::tag.tag',
+      'manyToMany',
+      'api::hackathon.hackathon'
+    >;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
@@ -1164,6 +1215,7 @@ declare module '@strapi/types' {
       'api::config.config': ApiConfigConfig;
       'api::event.event': ApiEventEvent;
       'api::faq.faq': ApiFaqFaq;
+      'api::hackathon.hackathon': ApiHackathonHackathon;
       'api::member.member': ApiMemberMember;
       'api::post.post': ApiPostPost;
       'api::reading-list.reading-list': ApiReadingListReadingList;

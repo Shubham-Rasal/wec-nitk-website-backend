@@ -26,6 +26,12 @@
       "relation": "manyToMany",
       "target": "api::reading-list.reading-list",
       "inversedBy": "tags"
+    },
+    "hackathons": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::hackathon.hackathon",
+      "mappedBy": "tags"
     }
   }
 }
