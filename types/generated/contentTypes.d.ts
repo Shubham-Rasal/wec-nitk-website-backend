@@ -976,6 +976,7 @@ export interface ApiHackathonHackathon extends Schema.CollectionType {
       'manyToMany',
       'api::tag.tag'
     >;
+    status: Attribute.Enumeration<['Ongoing', 'Past', 'Upcoming']>;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
