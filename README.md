@@ -10,14 +10,4 @@ The backend for hosting the CMS for the Web Club Website.
 
 https://dbdiagram.io/d/Web-Club-Website-Schema-65b7eacbac844320aef8b83b
 
-![Web Club Website Schema](https://github.com/WebClub-NITK/wec-nitk-website-backend/assets/90238207/32a96487-5e08-4bdd-a6df-e1c4be13c872)
-
-
-### Local Setup using docker
-
-1. Clone the repository
-2. Make the postgres container using the following command
-```bash
-docker start --name wec-postgres -p 5432:5432 -e POSTGRES_USER=postgres -e POSTGRES_PASSWORD=postgres -d postgres:14-bookworm
-```
-3. Run the server using `npm run develop`
+![Web Club Website Schema (1)](https://github.com/WebClub-NITK/wec-nitk-website-backend/assets/90238207/9b40768f-1eb5-434c-b8d5-951eec8cf538)
